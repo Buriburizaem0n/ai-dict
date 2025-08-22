@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Dictionary</title>
+    <style>
+        /* CSS样式保持不变 */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
+        h1 { color: #1a73e8; }
+        #search-controls { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; }
+        #lang-selectors { display: flex; gap: 5px; }
+        #lang-selectors select { padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 8px; }
+        #search-container { display: flex; flex-grow: 1; gap: 10px; }
+        #wordInput { flex-grow: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; }
+        #searchButton { padding: 10px 20px; font-size: 16px; background-color: #1a73e8; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        #searchButton:hover { background-color: #185abc; }
+        #results { margin-top: 30px; }
+        .entry { border-left: 3px solid #1a73e8; padding: 15px; margin-top: 20px; background-color: #f8f9fa; border-radius: 0 8px 8px 0; }
+        .phonetics { font-size: 1.1em; color: #5f6368; }
+        .phonetics span { margin-right: 20px; }
+        .part-of-speech { font-weight: bold; font-size: 1.2em; margin-top: 10px; }
+        .definition-block { margin-top: 15px; }
+        .definition-block small { color: #5f6368; }
+        .example { margin-top: 10px; font-style: italic; color: #3c4043; }
+        .example small { color: #70757a; }
+    </style>
+</head>
+<body>
+    <h1>AI 词典</h1>
+    
+    <div id="search-controls">
+        <div id="lang-selectors">
+            <select id="sourceLang">
+                <option value="en">英语 (English)</option>
+                <option value="zh">中文 (Chinese)</option>
+                <option value="es">西班牙语 (Spanish)</option>
+                <option value="fr">法语 (French)</option>
+                <option value="de">德语 (German)</option>
+                <option value="ru">俄语 (Russian)</option>
+                <option value="ja">日语 (Japanese)</option>
+                <option value="ar">阿拉伯语 (Arabic)</option>
+                <option value="pt">葡萄牙语 (Portuguese)</option>
+            </select>
+            <span>→</span>
+            <select id="targetLang">
+                <option value="zh">中文 (Chinese)</option>
+                <option value="en">英语 (English)</option>
+                <option value="es">西班牙语 (Spanish)</option>
+                <option value="fr">法语 (French)</option>
+                <option value="de">德语 (German)</option>
+                <option value="ru">俄语 (Russian)</option>
+                <option value="ja">日语 (Japanese)</option>
+                <option value="ar">阿拉伯语 (Arabic)</option>
+                <option value="pt">葡萄牙语 (Portuguese)</option>
+            </select>
+        </div>
+        <div id="search-container">
+            <input type="text" id="wordInput" placeholder="输入要查询的单词...">
+            <button id="searchButton">查询</button>
+        </div>
+    </div>
+
+    <div id="results"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

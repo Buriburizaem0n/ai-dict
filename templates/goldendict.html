@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* 这是为GoldenDict优化的美化CSS */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 15px;
+            background-color: #ffffff;
+            color: #202124;
+            font-size: 16px;
+        }
+        .word {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1a0dab;
+        }
+        .phonetics {
+            font-size: 1.2em;
+            color: #5f6368;
+            margin-top: -5px;
+            margin-bottom: 15px;
+        }
+        .entry {
+            border-left: 3px solid #1a73e8;
+            padding: 15px;
+            margin-top: 15px;
+            background-color: #f8f9fa;
+            border-radius: 0 8px 8px 0;
+        }
+        .part-of-speech {
+            font-weight: bold;
+            font-size: 1.3em;
+            color: #3c4043;
+        }
+        .definition-block {
+            margin-top: 10px;
+        }
+        .meaning {
+            font-size: 1.1em;
+        }
+        .example {
+            margin-top: 8px;
+            font-style: italic;
+            color: #70757a;
+        }
+        .error {
+            color: #d93025;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    {{if .Error}}
+        <div class="error">{{.Error}}</div>
+    {{else}}
+        <div class="word">{{.Word}}</div>
+        {{if .Result.P}}
+            <div class="phonetics">{{.Result.P}}</div>
+        {{end}}
+
+        {{if .Result.Defs}}
+            {{range .Result.Defs}}
+            <div class="entry">
+                <div class="part-of-speech">{{.POS}}</div>
+                <div class="definition-block">
+                    <div class="meaning">• {{.M}}</div>
+                    {{if .EX}}
+                    <div class="example">e.g., {{.EX}}</div>
+                    {{end}}
+                </div>
+            </div>
+            {{end}}
+        {{else}}
+            <p>未找到该词的释义。</p>
+        {{end}}
+    {{end}}
+</body>
+</html>

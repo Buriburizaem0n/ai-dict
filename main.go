@@ -118,12 +118,17 @@ func main() {
 }
 
 func getDefinition(word, sourceLang, targetLang string) ([]byte, error) {
-	wordKey := fmt.Sprintf("%s-%s:%s", sourceLang, targetLang, word)
+	// --- 新增：将接收到的单词统一转换为小写进行处理 ---
+	normalizedWord := strings.ToLower(word)
+	// --- 标准化结束 ---
+
+	// 后续所有操作都使用这个标准化后的单词
+	wordKey := fmt.Sprintf("%s-%s:%s", sourceLang, targetLang, normalizedWord)
 
 	var cachedDefinition string
 	err := db.QueryRow("SELECT definition FROM cache WHERE word_key = ?", wordKey).Scan(&cachedDefinition)
 	if err == nil {
-		log.Printf("Cache hit from SQLite for key: %s", wordKey)
+		log.Printf("Cache hit for key: %s (Original: '%s')", wordKey, word)
 		return []byte(cachedDefinition), nil
 	}
 
@@ -134,7 +139,8 @@ func getDefinition(word, sourceLang, targetLang string) ([]byte, error) {
 	if !ok {
 		return nil, fmt.Errorf("unsupported language pair: %s", promptKey)
 	}
-	prompt := strings.Replace(promptTemplate, "${word}", word, -1)
+	// 使用标准化后的单词去填充Prompt
+	prompt := strings.Replace(promptTemplate, "${word}", normalizedWord, -1)
 
 	requestBody, _ := json.Marshal(map[string]interface{}{"model": config.API.Model, "messages": []map[string]string{{"role": "user", "content": prompt}}})
 	req, _ := http.NewRequest("POST", config.API.URL, bytes.NewBuffer(requestBody))

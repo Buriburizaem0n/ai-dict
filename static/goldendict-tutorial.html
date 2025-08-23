@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoldenDict 集成教程 - AI 词典</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+            color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { color: #1a73e8; }
+        h1 { border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        .step { margin-bottom: 25px; }
+        .step-title { font-size: 1.4em; font-weight: bold; margin-bottom: 10px; }
+        code {
+            background-color: #f1f1f1;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+            color: #d93025;
+            word-break: break-all;
+        }
+        .container { border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
+        .home-link { display: block; margin-top: 30px; text-align: center; }
+        
+        .url-generator {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .url-generator select {
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin: 0 5px;
+        }
+        .url-output {
+            margin-top: 15px;
+            position: relative;
+        }
+        #generatedUrl {
+            display: block;
+            padding: 10px;
+            padding-right: 80px; /* 为复制按钮留出空间 */
+        }
+        #copyBtn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 5px 10px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+        #copyBtn:hover { background-color: #f1f1f1; }
+        .examples-list li { margin-bottom: 10px; }
+
+        @media (max-width: 600px) {
+            body { margin: 20px auto; padding: 0 15px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>如何将 AI 词典添加到 GoldenDict</h1>
+    <div class="container">
+        <p>通过本教程，您可以将这个强大的实时AI词典无缝集成到您本地的 GoldenDict 软件中，获得顶级的桌面端查词体验。</p>
+
+        <div class="step">
+            <div class="step-title">重要说明</div>
+            <p>GoldenDict 无法动态传递您选择的语言对。因此，您需要为您希望使用的**每一个语言对**（例如“英→汉”、“德→英”等）都单独添加一个词典条目。</p>
+            <p>为了简化这个过程，我们提供了下面的 **URL生成器** 和常用示例。</p>
+        </div>
+
+        <div class="step">
+            <div class="step-title">URL 生成器</div>
+            <div class="url-generator">
+                <label for="sourceLangGen">源语言:</label>
+                <select id="sourceLangGen"></select>
+                <span>→</span>
+                <label for="targetLangGen">目标语言:</label>
+                <select id="targetLangGen"></select>
+
+                <div class="url-output">
+                    <p><strong>生成的URL (请复制):</strong></p>
+                    <code id="generatedUrl"></code>
+                    <button id="copyBtn">复制</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">设置步骤</div>
+            <ol>
+                <li>打开 GoldenDict, 进入 <code>编辑</code> → <code>词典</code> (快捷键 <code>F3</code>)。</li>
+                <li>点击 <code>网站</code> 标签页, 然后点击 <code>添加...</code> 按钮。</li>
+                <li>在弹出的窗口中填写信息：
+                    <ul>
+                        <li><strong>启用</strong>: ✅ (务必勾选)</li>
+                        <li><strong>名称</strong>: 建议使用能识别的名称, 例如 <code>AI 词典 (英→汉)</code></li>
+                        <li><strong>地址</strong>: 从上方的 **URL生成器** 或下方的常用示例中，复制对应的URL并粘贴到这里。</li>
+                    </ul>
+                </li>
+                <li>点击 <code>确定</code> 保存。</li>
+                <li>**重复第3、4步**为您需要的其他语言对添加更多词典。</li>
+                <li>全部添加完毕后，点击主设置窗口的 <code>确定</code> 使设置生效。</li>
+            </ol>
+        </div>
+        
+        <div class="step">
+            <div class="step-title">常用语言对示例</div>
+            <p>为方便起见，这里提供一些常用组合的URL。请根据您的服务器地址（本地或远程）进行修改。</p>
+            <ul class="examples-list">
+                <li><strong>英 → 汉:</strong> <code>http://localhost:8080/golden-dict?source=en&target=zh&word=%GDWORD%</code></li>
+                <li><strong>德 → 汉:</strong> <code>http://localhost:8080/golden-dict?source=de&target=zh&word=%GDWORD%</code></li>
+                <li><strong>日 → 汉:</strong> <code>http://localhost:8080/golden-dict?source=ja&target=zh&word=%GDWORD%</code></li>
+                <li><strong>汉 → 英:</strong> <code>http://localhost:8080/golden-dict?source=zh&target=en&word=%GDWORD%</code></li>
+                <li><strong>英 → 英 (单语):</strong> <code>http://localhost:8080/golden-dict?source=en&target=en&word=%GDWORD%</code></li>
+            </ul>
+        </div>
+        
+        <h2>完成！</h2>
+        <p>现在，您可以在 GoldenDict 中查词了。您添加的每一个语言对都会作为一个独立的标签页显示结果。</p>
+    </div>
+
+    <a href="/" class="home-link">返回词典主页</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sourceSelect = document.getElementById('sourceLangGen');
+            const targetSelect = document.getElementById('targetLangGen');
+            const urlOutput = document.getElementById('generatedUrl');
+            const copyBtn = document.getElementById('copyBtn');
+
+            const langNameMap = {
+                "en": "英语 (English)", "zh": "中文 (Chinese)", "es": "西班牙语 (Spanish)",
+                "fr": "法语 (French)", "de": "德语 (German)", "ru": "俄语 (Russian)",
+                "ja": "日语 (Japanese)", "ar": "阿拉伯语 (Arabic)", "pt": "葡萄牙语 (Portuguese)",
+            };
+            
+            // 假设可用语言列表（可以从主页的下拉菜单获取或硬编码）
+            const languages = ["en", "zh", "es", "fr", "de", "ru", "ja", "ar", "pt"];
+
+            function populateSelect(selectElement) {
+                languages.forEach(langCode => {
+                    const option = document.createElement('option');
+                    option.value = langCode;
+                    option.textContent = langNameMap[langCode] || langCode;
+                    selectElement.appendChild(option);
+                });
+            }
+
+            populateSelect(sourceSelect);
+            populateSelect(targetSelect);
+
+            // 设置默认值
+            sourceSelect.value = 'en';
+            targetSelect.value = 'zh';
+
+            function generateUrl() {
+                const source = sourceSelect.value;
+                const target = targetSelect.value;
+                const baseUrl = window.location.origin; // 自动获取当前域名和端口
+                const generated = `${baseUrl}/golden-dict?source=${source}&target=${target}&word=%GDWORD%`;
+                urlOutput.textContent = generated;
+            }
+
+            sourceSelect.addEventListener('change', generateUrl);
+            targetSelect.addEventListener('change', generateUrl);
+
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(urlOutput.textContent).then(() => {
+                    copyBtn.textContent = '已复制!';
+                    setTimeout(() => { copyBtn.textContent = '复制'; }, 2000);
+                }, (err) => {
+                    console.error('Could not copy text: ', err);
+                });
+            });
+
+            // 初始加载时生成一次URL
+            generateUrl();
+        });
+    </script>
+</body>
+</html>

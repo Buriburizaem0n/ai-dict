@@ -3,27 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Dictionary</title>
+    <title>AI 词典</title>
     <style>
-        /* CSS样式保持不变 */
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
+        /* --- 基础样式 (桌面优先) --- */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+            color: #333;
+            background-color: #ffffff;
+            transition: all 0.2s ease-in-out;
+        }
         h1 { color: #1a73e8; }
-        #search-controls { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; }
-        #lang-selectors { display: flex; gap: 5px; }
-        #lang-selectors select { padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 8px; }
-        #search-container { display: flex; flex-grow: 1; gap: 10px; }
-        #wordInput { flex-grow: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; }
-        #searchButton { padding: 10px 20px; font-size: 16px; background-color: #1a73e8; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        #search-controls { 
+            display: flex; 
+            gap: 20px; /* 增加桌面端间距 */
+            margin-bottom: 20px; 
+            align-items: center; 
+        }
+        #lang-selectors { 
+            display: flex; 
+            gap: 10px; /* 增加桌面端间距 */
+            align-items: center;
+        }
+        #lang-selectors select { 
+            padding: 8px; 
+            font-size: 14px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+        }
+        #search-container { 
+            display: flex; 
+            flex-grow: 1; 
+            gap: 10px; 
+        }
+        #wordInput { 
+            flex-grow: 1; 
+            padding: 10px; 
+            font-size: 16px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+        }
+        #searchButton { 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            background-color: #1a73e8; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+        }
         #searchButton:hover { background-color: #185abc; }
         #results { margin-top: 30px; }
-        .entry { border-left: 3px solid #1a73e8; padding: 15px; margin-top: 20px; background-color: #f8f9fa; border-radius: 0 8px 8px 0; }
+        .entry { 
+            border-left: 3px solid #1a73e8; 
+            padding: 15px; 
+            margin-top: 20px; 
+            background-color: #f8f9fa; 
+            border-radius: 0 8px 8px 0; 
+        }
         .phonetics { font-size: 1.1em; color: #5f6368; }
-        .phonetics span { margin-right: 20px; }
         .part-of-speech { font-weight: bold; font-size: 1.2em; margin-top: 10px; }
         .definition-block { margin-top: 15px; }
-        .definition-block small { color: #5f6368; }
         .example { margin-top: 10px; font-style: italic; color: #3c4043; }
-        .example small { color: #70757a; }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #f0f0f0;
+            text-align: center;
+            font-size: 14px;
+        }
+        footer a {
+            color: #5f6368;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        /* --- 2. 新增：媒体查询 (移动端样式) --- */
+        /* 当屏幕宽度小于等于 600px 时，应用以下样式 */
+        @media (max-width: 600px) {
+            body {
+                /* 减少手机上的边距 */
+                margin: 20px auto;
+                padding: 0 15px;
+            }
+
+            #search-controls {
+                /* 关键改动：让搜索控件垂直堆叠 */
+                flex-direction: column;
+                align-items: stretch; /* 让子项宽度撑满 */
+                gap: 15px;
+            }
+
+            #lang-selectors {
+                justify-content: center; /* 让语言选择居中 */
+            }
+
+            #search-container {
+                flex-direction: column; /* 让输入框和按钮也垂直堆叠 */
+            }
+            
+            #searchButton {
+                padding: 12px; /* 增大按钮点击区域 */
+                font-size: 18px; /* 增大按钮文字 */
+            }
+
+            h1 {
+                font-size: 2em; /* 调整标题大小 */
+            }
+        }
     </style>
 </head>
 <body>
@@ -62,7 +153,10 @@
     </div>
 
     <div id="results"></div>
+    <footer>
+            <a href="/goldendict-tutorial.html">如何集成到 GoldenDict？</a>
+        </footer>
 
-    <script src="app.js"></script>
-</body>
+        <script src="app.js"></script>
+    </body>
 </html>

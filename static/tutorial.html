@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用教程 - AI 词典</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+            color: #333;
+            line-height: 1.7;
+        }
+        h1, h2 { color: #1a73e8; }
+        h1 { border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        .step { margin-bottom: 30px; }
+        .step-title { font-size: 1.4em; font-weight: bold; margin-bottom: 10px; }
+        .container { border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
+        .home-link { display: block; margin-top: 30px; text-align: center; }
+        .screenshot-placeholder {
+            border: 2px dashed #ccc;
+            padding: 40px 20px;
+            text-align: center;
+            color: #777;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        @media (max-width: 600px) {
+            body { margin: 20px auto; padding: 0 15px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>AI 词典使用教程</h1>
+    <div class="container">
+        <p>欢迎使用AI词典！这是一个由先进人工智能驱动的实时多语言词典。本教程将引导您了解它的各项功能，帮助您获得最佳的查词体验。</p>
+
+        <div class="step">
+            <h2 class="step-title">1. 界面概览</h2>
+            <p>词典的主界面主要分为三个区域：语言选择区、搜索区和结果显示区。</p>
+            <div class="screenshot-placeholder">
+                <img src="pic/home.png" alt="界面截图" style="max-width:100%; height:auto;">
+            </div>
+        </div>
+
+        <div class="step">
+            <h2 class="step-title">2. 选择语言</h2>
+            <p>在搜索框的左侧，您可以看到两个下拉菜单，分别用于选择“源语言”（您要查询的单词的语言）和“目标语言”（您希望看到的释义的语言）。</p>
+            <div class="screenshot-placeholder">
+                <img src="pic/choices.png" alt="语言选择截图" style="max-width:100%; height:auto;">
+            </div>
+            <p><strong>智能关联</strong>：请注意，当您选择一门源语言后，目标语言菜单会自动更新，只显示我们当前支持的翻译目标。这可以防止您选择无效的语言组合。</p>
+        </div>
+        
+        <div class="step">
+            <h2 class="step-title">3. 查询单词或短语</h2>
+            <p>在输入框中键入您想查询的单词或短语，然后点击“查询”按钮或直接按键盘上的“回车(Enter)”键。</p>
+            <ul>
+                <li><strong>大小写不敏感</strong>：查询时无需担心大小写问题，系统会自动进行标准化处理。查询“Test”、“test”或“TEST”会得到相同的结果。</li>
+                <li><strong>长度限制</strong>：为了保证查询效率和准确性，输入框有50个字符的长度限制，不支持查询长句。</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <h2 class="step-title">4. 理解查询结果</h2>
+            <p>查询成功后，结果会清晰地展示在下方，通常包含以下几个部分：</p>
+            <div class="screenshot-placeholder">
+                <img src="pic/result.png" alt="查询结果截图" style="max-width:100%; height:auto;">
+            </div>
+            <ul>
+                <li><strong>音标 (Phonetics)</strong>：帮助您了解单词的正确发音。</li>
+                <li><strong>词性 (Part of Speech)</strong>：例如名词(noun)、动词(verb)、形容词(adj)等。</li>
+                <li><strong>释义 (Meaning)</strong>：单词在目标语言中的核心含义。</li>
+                <li><strong>例句 (Example)</strong>：一个简单的句子，展示单词在实际语境中的用法。</li>
+            </ul>
+        </div>
+        <div class="step">
+            <h2 class="step-title">5. 结合goldendict使用</h2>
+            <p>如果您习惯使用桌面词典软件，可以将AI词典集成到GoldenDict中，享受更便捷的查词体验。请参考我们的<a href="/goldendict-tutorial.html">GoldenDict集成教程</a>了解详细步骤。</p>
+
+            <h2>常见问题 (FAQ)</h2>
+        <p><strong>问：为什么我的查询会失败？</strong><br>
+        答：请检查1) 您的网络连接是否正常；2) 您选择的语言对是否受支持；3) 您输入的单词是否过长或包含特殊乱码。</p>
+        <p><strong>问：为什么有些很常见的单词释义很简单？</strong><br>
+        答：这取决于后端配置的AI模型。一些为速度优化的小模型可能只会给出最核心的释义。管理员可以通过在服务器的 `config.yaml` 文件中配置更强大的模型来获取更详尽的释义。</p>
+    </div>
+
+    <a href="/" class="home-link">返回词典主页</a>
+</body>
+</html>
